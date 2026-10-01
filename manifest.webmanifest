@@ -1,7 +1,7 @@
 {
-  "name": "Tech North Tools",
-  "short_name": "Tech North",
-  "description": "Tech North equipment and worker management",
+  "name": "Tool Management App",
+  "short_name": "Tool App",
+  "description": "Tool, equipment, worker and lifting equipment management",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -9,12 +9,6 @@
   "background_color": "#ffffff",
   "theme_color": "#0b74d1",
   "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
     {
       "src": "icon-192.png",
       "sizes": "192x192",
