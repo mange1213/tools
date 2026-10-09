@@ -1,13 +1,13 @@
 {
-  "name": "Tool Management App",
+  "name": "Tool App - Equipment Management",
   "short_name": "Tool App",
-  "description": "Tool, equipment, worker and lifting equipment management",
+  "description": "Red and black tool, battery, chain block and equipment management app",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#ffffff",
-  "theme_color": "#0b74d1",
+  "background_color": "#111111",
+  "theme_color": "#c90016",
   "icons": [
     {
       "src": "icon-192.png",

@@ -1,5 +1,5 @@
-const CACHE = 'tool-management-v22';
-const CORE = ['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./watermark.svg','./sw.js'];
+const CACHE = 'tool-management-redblack-v23';
+const CORE = ['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./tool-app-logo.png','./watermark.svg','./sw.js'];
 self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', event => {
