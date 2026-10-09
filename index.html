@@ -141,7 +141,52 @@ function workerHistory(id){let w=db.workers.find(w=>w.id===id)||(db.archivedWork
 function populateCheckoutFilters(){let cats=[...new Set([...db.categories,...db.tools.map(x=>String(x.category||'').trim()).filter(Boolean)])].sort((a,b)=>a.localeCompare(b,undefined,{sensitivity:'base'}));let sel=$('coCategory'),cur=sel?.value||'';if(sel){sel.innerHTML='<option value="">All categories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(cats.includes(cur))sel.value=cur}}
 function renderCheckoutEquipment(){let q=($('coSearch')?.value||'').trim().toLowerCase(),cat=($('coCategory')?.value||'').trim().toLowerCase();let available=db.tools.filter(x=>!x.archived&&availableQty(x)>0&&(!cat||String(x.category||'').trim().toLowerCase()===cat)&&(!q||[x.name,x.equip,x.serial,x.make,x.category].join(' ').toLowerCase().includes(q)));$('coEquipmentList').innerHTML=available.length?available.map(x=>`<div class="co-row"><label class="check co-select"><input type="checkbox" class="coToolCheck" value="${x.id}" onchange="toggleCheckoutQty('${x.id}');updateCheckoutSummary()"></label><span class="co-equip-no">${esc(x.equip||'—')}</span><span class="co-name"><b>${esc(x.name)}</b></span><span>${esc(x.category||'Uncategorised')}</span><span>${esc(x.make||'—')}</span><span>${esc(x.weight??'—')}</span><span>${availableQty(x)}</span><input id="coQty_${x.id}" class="coQtyInput" type="number" min="1" max="${availableQty(x)}" value="1" disabled aria-label="Quantity for ${esc(x.name)}"></div>`).join(''):'<div class="empty-state">No equipment matches your search/category.</div>';updateCheckoutSummary()}
 function updateCheckoutSummary(){const box=$('coSelectedSummary');if(!box)return;const checks=[...document.querySelectorAll('.coToolCheck:checked')];if(!checks.length){box.innerHTML='<div class="muted">No equipment selected yet.</div>';return}box.innerHTML=checks.map(c=>{const x=db.tools.find(t=>t.id===c.value),qv=Math.max(1,parseInt($('coQty_'+c.value)?.value||1,10));return `<div class="selected-item"><div><b>${esc(x?.name||'')}</b><small>${esc(x?.equip||'')}</small></div><strong>×${qv}</strong><span>${esc(x?.weight??'—')} kg</span></div>`}).join('')}
+function toggleCheckoutQty(id){
+  const check=document.querySelector('.coToolCheck[value="'+CSS.escape(String(id))+'"]');
+  const qty=$('coQty_'+id);
+  if(qty){qty.disabled=!check?.checked;if(check?.checked){const t=db.tools.find(x=>String(x.id)===String(id));qty.max=availableQty(t||{qty:0});qty.value=Math.min(Math.max(1,Number(qty.value)||1),Math.max(1,availableQty(t||{qty:0})));}}
+}
 function clearCheckoutSelection(){document.querySelectorAll('.coToolCheck').forEach(c=>c.checked=false);document.querySelectorAll('.coQtyInput').forEach(i=>i.disabled=true);updateCheckoutSummary()}
+function checkoutTool(){
+  const checks=[...document.querySelectorAll('.coToolCheck:checked')];
+  if(!checks.length)return alert('Please select at least one piece of equipment.');
+  const workerId=$('coWorker').value;
+  const worker=db.workers.find(w=>String(w.id)===String(workerId));
+  if(!worker)return alert('Please add or select a worker first.');
+  const issuer=$('coIssuer').value.trim();
+  if(!issuer)return alert('Please enter the name of the person issuing the equipment.');
+  const items=[];
+  for(const c of checks){
+    const t=db.tools.find(x=>String(x.id)===String(c.value));
+    const qty=Math.floor(Number($('coQty_'+c.value)?.value)||1);
+    if(!t||t.archived||qty<1||qty>availableQty(t))return alert('Please check the quantity available for each selected item.');
+    items.push({t,qty});
+  }
+  const due=$('coDue').value,reason=$('coReason').value.trim(),notes=$('coNotes').value.trim();
+  if(!confirm('Check out '+items.length+' selected equipment item(s) to '+worker.name+'?'))return;
+  const previous=JSON.stringify(db);
+  items.forEach(({t,qty})=>{
+    t.outQty=Number(t.outQty||0)+qty;
+    t.status=availableQty(t)>0?'Available':'Checked Out';
+    const loan={id:'loan_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),toolId:t.id,toolName:t.name,equip:t.equip,category:t.category,qty,worker:worker.name,workerId:worker.id,emp:worker.emp,issuer,reason,due,notes,inspection:{preUse:$('ci1').checked,complete:$('ci2').checked,safe:$('ci3').checked},checkedOut:now(),returned:false};
+    db.loans.push(loan);
+    db.events.push({time:new Date().toISOString(),type:'Check Out',toolId:t.id,tool:t.name,equip:t.equip,category:t.category,worker:worker.name,workerId:worker.id,emp:worker.emp,qty,due,condition:loan.inspection.preUse&&loan.inspection.complete&&loan.inspection.safe?'Inspection checks completed':'Inspection checks not all completed',notes:[reason,notes,'Issued by: '+issuer].filter(Boolean).join(' | ')});
+  });
+  if(!save()){db=JSON.parse(previous);return;}
+  clearCheckoutSelection();
+  $('coIssuer').value='';$('coReason').value='';$('coDue').value='';$('coNotes').value='';$('ci1').checked=false;$('ci2').checked=false;$('ci3').checked=false;
+  alert('Equipment checked out successfully.');
+}
+function checkinLoan(id){
+  const loan=db.loans.find(l=>String(l.id)===String(id)&&!l.returned);if(!loan)return;
+  const condition=prompt('Return condition (Good, Damaged, or Missing):','Good');if(condition===null)return;
+  const c=condition.trim().toLowerCase();if(!['good','damaged','missing'].includes(c))return alert('Enter Good, Damaged, or Missing.');
+  const t=db.tools.find(x=>String(x.id)===String(loan.toolId));
+  if(t){t.outQty=Math.max(0,Number(t.outQty||0)-Number(loan.qty||0));if(c==='damaged')t.damagedQty=Number(t.damagedQty||0)+Number(loan.qty||0);if(c==='missing')t.missingQty=Number(t.missingQty||0)+Number(loan.qty||0);t.status=availableQty(t)>0?'Available':(c==='damaged'?'Damaged':c==='missing'?'Missing':'Checked Out');}
+  loan.returned=true;loan.returnedAt=now();loan.returnCondition=c[0].toUpperCase()+c.slice(1);
+  db.events.push({time:new Date().toISOString(),type:'Check In',toolId:loan.toolId,tool:loan.toolName,equip:loan.equip,category:loan.category,worker:loan.worker,workerId:loan.workerId,emp:loan.emp,qty:loan.qty,condition:loan.returnCondition,notes:'Equipment returned'});
+  save();
+}
 
 function checkoutPage(){populateCheckoutFilters();renderCheckoutEquipment();$('coWorker').innerHTML=db.workers.map(x=>`<option value="${x.id}">${esc(x.name)} — ${esc(x.emp)}</option>`).join('');let out=db.loans.filter(l=>!l.returned);$('outRows').innerHTML=out.map(l=>`<div style="padding:10px;border-bottom:1px solid #ddd"><b>${esc(l.toolName)}</b> ×${l.qty} — ${esc(l.worker)} — due ${esc(l.due||'No due date')} ${l.due&&l.due<today()?'<span class="danger">OVERDUE</span>':''} <button class="btn small green" onclick="checkinLoan('${l.id}')">Check-in</button></div>`).join('')||'<span class="muted">Nothing checked out.</span>'}
 function histSelect(){
