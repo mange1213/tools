@@ -1,5 +1,5 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c90016"><title>Tool Management App</title><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><style>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c90016"><title>Tool Management App</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><style>
 :root{--blue:#e0001b;--dark:#080808;--light:#202020;--line:#383838;--ok:#2f7d4c;--warn:#a66a00;--bad:#a32929}*{box-sizing:border-box}html,body{width:100%;min-height:100%;overflow-x:hidden}body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#101010;color:#f5f5f5}button,input,select,textarea{font:inherit}button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.top{height:74px;background:linear-gradient(135deg,#080808,#c90016);color:white;display:flex;align-items:center;padding:8px 22px;gap:14px;box-shadow:0 2px 10px #0003;position:sticky;top:0;z-index:20;overflow:hidden}.top:after{content:"";position:absolute;inset:0;background:url("watermark.svg") center/700px auto repeat-x;opacity:.16;filter:brightness(2) saturate(.35);pointer-events:none}.top>*{position:relative;z-index:1}.logo{height:62px;width:62px;object-fit:contain;border-radius:10px;background:#1b1b1b;padding:3px}.title{font-size:23px;font-weight:700}.wrap{display:flex;min-height:calc(100vh - 74px)}aside{width:235px;background:#080808;color:white;padding:18px 12px}aside button{width:100%;padding:12px;margin:4px 0;border:0;border-radius:8px;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer}aside button:hover,aside button.active{background:#c90016}.main{flex:1;padding:24px;max-width:1500px;position:relative;isolation:isolate;background:transparent;overflow:hidden}.main:before{content:"";position:absolute;inset:0;background:url("watermark.svg") center/760px auto repeat;opacity:.13;filter:grayscale(.35) saturate(.7);pointer-events:none;z-index:0}.main>*{position:relative;z-index:1}.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.card{background:#1b1b1b;border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 2px 8px #0000000b}.card b{font-size:28px;display:block;margin-top:7px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.panel{background:#1b1b1b;border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:18px}.btn{border:0;border-radius:7px;padding:9px 13px;background:var(--blue);color:white;cursor:pointer;font-weight:600}.btn.gray{background:#607681}.btn.red{background:#b53b3b}.btn.green{background:#2f7d4c}.btn.warn{background:#9a6900}.btn.small{padding:6px 9px;font-size:12px}input,select,textarea{width:100%;padding:10px;border:1px solid #c9d6dc;border-radius:7px;background:#1b1b1b}label{font-size:12px;font-weight:700;color:#dedede;display:block;margin-bottom:5px}textarea{min-height:75px;resize:vertical}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar input{max-width:320px}table{width:100%;border-collapse:collapse;background:#1b1b1b}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:top}th{background:#242424}.status{padding:4px 8px;border-radius:20px;font-size:11px;font-weight:700}.available{background:#dff3e5;color:#22623a}.checked{background:#1b1b1b0c9;color:#7a5a00}.damaged{background:#ffe0e0;color:#8a2222}.missing{background:#eadcfb;color:#5c3188}.archived{background:#333333;color:#52646d}.muted{color:#6a7c84}.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.modal.show{display:flex}.modalbox{background:#1b1b1b;border-radius:14px;max-width:850px;width:100%;max-height:92vh;overflow:auto;padding:22px}.check{display:flex;gap:8px;align-items:center}.check input{width:auto}.photo{width:58px;height:58px;object-fit:cover;border-radius:7px;border:1px solid var(--line)}.water{display:none}.danger{color:#a32929;font-weight:700}.notice{padding:10px;border-radius:8px;background:#1b1b1b4cf;margin:6px 0}.ok{padding:10px;border-radius:8px;background:#e3f4e8;margin:6px 0}.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.mini{padding:12px;background:#242424;border:1px solid var(--line);border-radius:9px}.mini b{font-size:20px;display:block}.thumb{max-width:140px;max-height:100px;border-radius:8px;border:1px solid var(--line)}.right{float:right}@media(max-width:900px){aside{width:180px}.cards{grid-template-columns:repeat(2,1fr)}.grid,.grid3{grid-template-columns:1fr}.main{padding:14px}.title{font-size:17px}}
 @media(max-width:600px){body{padding-bottom:64px}.top{height:60px;padding:6px 10px}.logo{height:50px;width:50px}.title{font-size:15px;line-height:1.15}.top small{font-size:9px!important}.wrap{display:block;min-height:calc(100vh - 60px)}aside{position:fixed;z-index:30;left:0;right:0;bottom:0;width:100%;height:64px;padding:5px 4px;background:#080808;display:flex;gap:2px;overflow-x:auto;box-shadow:0 -2px 12px #0004}aside button{flex:0 0 88px;width:88px;height:54px;margin:0;padding:6px 4px;border-radius:7px;text-align:center;font-size:10px;line-height:1.1;display:flex;align-items:center;justify-content:center}.main{padding:10px}h2{font-size:21px;margin:7px 0 12px}h3{font-size:16px}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card{padding:12px;border-radius:10px}.card b{font-size:23px}.grid,.grid3{grid-template-columns:1fr;gap:9px}.statgrid{grid-template-columns:repeat(2,1fr)}.panel{padding:12px;margin-top:10px;border-radius:10px}.toolbar{display:grid;grid-template-columns:1fr;gap:7px}.toolbar input,.toolbar select,.toolbar .btn{width:100%;max-width:none}.btn{min-height:42px;padding:10px 13px}table{font-size:12px;min-width:760px}th,td{padding:8px}input,select,textarea{font-size:16px;min-height:44px}.textarea{min-height:90px}.check{min-height:40px;padding:5px 0}.check input{width:20px;height:20px}.modal{padding:8px}.modalbox{max-height:94vh;padding:14px;border-radius:12px}.modalbox .grid,.modalbox .grid3{grid-template-columns:1fr}.modalbox .btn{width:100%;margin:4px 0}#historyBox,#reportBox{overflow-x:auto}.install{font-size:11px!important;padding:7px 9px!important}}
 
@@ -163,6 +163,31 @@ async function getPhoto(id){try{let d=await photoDB();return await new Promise((
 async function deletePhoto(id){try{let d=await photoDB();d.transaction('photos','readwrite').objectStore('photos').delete(id)}catch(e){}}
 function storageCopy(){let c=JSON.parse(JSON.stringify(db));c.tools.forEach(x=>delete x.photo);(c.archivedTools||[]).forEach(x=>delete x.photo);return c}
 async function hydratePhotos(){for(const x of db.tools){if(x.photo){await putPhoto(x.id,x.photo);delete x.photo}}for(const x of (db.archivedTools||[])){if(x.photo){await putPhoto(x.id,x.photo);delete x.photo}}try{localStorage.removeItem(KEY);localStorage.setItem(KEY,JSON.stringify(storageCopy()))}catch(e){}}
+
+// IndexedDB fallback keeps records editable when localStorage reaches its quota.
+const TOOL_DB_NAME='tool-management-storage-v1';
+function openToolStorage(){
+  return new Promise((resolve,reject)=>{
+    if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return}
+    const req=indexedDB.open(TOOL_DB_NAME,1);
+    req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains('records'))d.createObjectStore('records')};
+    req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error('Could not open storage'));
+  });
+}
+async function writeToolStorage(value){
+  const d=await openToolStorage();
+  await new Promise((resolve,reject)=>{
+    const tx=d.transaction('records','readwrite');tx.objectStore('records').put(value,'main');
+    tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error||new Error('Storage write failed'));tx.onabort=()=>reject(tx.error||new Error('Storage write aborted'));
+  });d.close();
+}
+async function readToolStorage(){
+  const d=await openToolStorage();
+  const value=await new Promise((resolve,reject)=>{
+    const tx=d.transaction('records','readonly');const req=tx.objectStore('records').get('main');
+    req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error||new Error('Storage read failed'));
+  });d.close();return value;
+}
 function save(){
   try{
     localStorage.setItem(KEY,JSON.stringify(storageCopy()));
@@ -170,8 +195,20 @@ function save(){
     render();
     return true;
   }catch(e){
-    console.error(e);
-    try{localStorage.removeItem('technorth_prepared_backup');localStorage.setItem(KEY,JSON.stringify(storageCopy()));render();return true;}catch(retryError){console.error(retryError);alert('Device storage is still full. Please download a backup, then remove unnecessary browser site data only after the backup is confirmed.');return false;}
+    console.error('Local storage is full; trying IndexedDB backup storage.',e);
+    try{
+      const copy=JSON.parse(JSON.stringify(storageCopy()));
+      writeToolStorage(copy).then(()=>console.info('Equipment records saved to IndexedDB')).catch(err=>{
+        console.error(err);
+        alert('The phone browser storage is full and the backup storage could not save. Please download a backup before removing any site data.');
+      });
+      render();
+      return true;
+    }catch(retryError){
+      console.error(retryError);
+      alert('The phone browser storage is full. Download a backup before removing any site data.');
+      return false;
+    }
   }
 }
 function nav(){let items=[['dashboard','📊 Dashboard'],['tools','🧰 Equipment'],['workers','👥 Workers'],['checkout','🔄 Check-out / Check-in'],['history','📈 History & Reports'],['backup','💾 Backup / Restore'],['users','🔐 Users / Admin'],['settings','⚙️ Settings']];$('nav').innerHTML=items.map((x,i)=>`<button class="${i?'':'active'}" onclick="page('${x[0]}',this)">${x[1]}</button>`).join('');let mob=[['dashboard','🏠','Dashboard'],['checkout','✓','Check Out'],['history','◷','History'],['workers','👥','Workers'],['tools','🧰','More']];$('mobileNav').innerHTML=mob.map((x,i)=>`<button class="${i?'':'active'}" onclick="page('${x[0]}',this)"><span>${x[1]}</span><small>${x[2]}</small></button>`).join('')}
@@ -191,6 +228,35 @@ function renderCheckoutEquipment(){let q=($('coSearch')?.value||'').trim().toLow
 function toggleCheckoutQty(id){const check=document.querySelector('.coToolCheck[value=\"'+CSS.escape(String(id))+'\"]');const qty=$('coQty_'+id);if(qty){qty.disabled=!check?.checked;if(check?.checked){const max=parseInt(qty.max||'1',10);let v=parseInt(qty.value||'1',10);if(!Number.isFinite(v)||v<1)v=1;if(Number.isFinite(max)&&max>0)v=Math.min(v,max);qty.value=String(v)}}}
 function updateCheckoutSummary(){const box=$('coSelectedSummary');if(!box)return;const checks=[...document.querySelectorAll('.coToolCheck:checked')];if(!checks.length){box.innerHTML='<div class="muted">No equipment selected yet.</div>';return}box.innerHTML=checks.map(c=>{const x=db.tools.find(t=>t.id===c.value),qv=Math.max(1,parseInt($('coQty_'+c.value)?.value||1,10));return `<div class="selected-item"><div><b>${esc(x?.name||'')}</b><small>${esc(x?.equip||'')}</small></div><strong>×${qv}</strong><span>${esc(x?.weight??'—')} kg</span></div>`}).join('')}
 function clearCheckoutSelection(){document.querySelectorAll('.coToolCheck').forEach(c=>c.checked=false);document.querySelectorAll('.coQtyInput').forEach(i=>i.disabled=true);updateCheckoutSummary()}
+
+
+function checkoutTool(){
+ try{
+  const workerId=$('coWorker')?.value||'',worker=db.workers.find(w=>String(w.id)===String(workerId)),checks=[...document.querySelectorAll('.coToolCheck:checked')],due=$('coDue')?.value||'',notes=$('coNotes')?.value||'';
+  if(!checks.length){alert('Please select at least one piece of equipment.');return}
+  if(!worker){alert('Please select a worker before booking out equipment.');return}
+  const items=[];
+  for(const c of checks){const tool=db.tools.find(t=>String(t.id)===String(c.value));if(!tool){alert('Selected equipment was not found. Refresh and select it again.');return}
+   const qty=Math.floor(Number($('coQty_'+tool.id)?.value||1)),available=availableQty(tool);
+   if(!Number.isFinite(qty)||qty<1||qty>available){alert('Enter a valid quantity for '+(tool.name||'equipment')+'. Available: '+available);return}
+   items.push({tool,qty});
+  }
+  db.loans=db.loans||[];db.events=db.events||[];const stamp=now();
+  items.forEach(({tool,qty})=>{tool.outQty=Number(tool.outQty||0)+qty;tool.status=availableQty(tool)>0?'Available':'Checked Out';
+   const loan={id:'loan_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),toolId:tool.id,toolName:tool.name||'',equip:tool.equip||'',serial:tool.serial||'',qty,worker:worker.name||'',workerId:worker.id,emp:worker.emp||'',date:stamp,due,notes,returned:false};
+   db.loans.push(loan);db.events.push({id:'event_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),type:'Check Out',action:'Check Out',toolId:tool.id,toolName:tool.name||'',equip:tool.equip||'',serial:tool.serial||'',qty,worker:worker.name||'',workerId:worker.id,date:stamp,due,notes});
+  });
+  if(save()){clearCheckoutSelection();if($('coNotes'))$('coNotes').value='';checkoutPage();alert('Equipment booked out successfully.')}
+ }catch(err){console.error('Checkout failed',err);alert('Booking failed. Check that equipment and a worker are selected and try again.')}
+}
+function checkinLoan(id){
+ const loan=(db.loans||[]).find(l=>String(l.id)===String(id)&&!l.returned);if(!loan){alert('Booking not found or already checked in.');return}
+ const tool=db.tools.find(t=>String(t.id)===String(loan.toolId)),qty=Math.max(1,Number(loan.qty)||1);
+ if(tool){tool.outQty=Math.max(0,Number(tool.outQty||0)-qty);tool.status=availableQty(tool)>0?'Available':'Checked Out'}
+ loan.returned=true;loan.returnDate=now();db.events=db.events||[];
+ db.events.push({id:'event_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),type:'Check In',action:'Check In',toolId:loan.toolId,toolName:loan.toolName||tool?.name||'',equip:tool?.equip||loan.equip||'',serial:tool?.serial||loan.serial||'',qty,worker:loan.worker||'',workerId:loan.workerId,date:loan.returnDate});
+ if(save()){checkoutPage();alert('Equipment checked in successfully.')}
+}
 
 function checkoutPage(){populateCheckoutFilters();renderCheckoutEquipment();$('coWorker').innerHTML=db.workers.map(x=>`<option value="${x.id}">${esc(x.name)} — ${esc(x.emp)}</option>`).join('');let out=db.loans.filter(l=>!l.returned);$('outRows').innerHTML=out.map(l=>`<div style="padding:10px;border-bottom:1px solid #ddd"><b>${esc(l.toolName)}</b> ×${l.qty} — ${esc(l.worker)} — due ${esc(l.due||'No due date')} ${l.due&&l.due<today()?'<span class="danger">OVERDUE</span>':''} <button class="btn small green" onclick="checkinLoan('${l.id}')">Check-in</button></div>`).join('')||'<span class="muted">Nothing checked out.</span>'}
 function histSelect(){
@@ -257,48 +323,18 @@ function closeModal(){$('modal').classList.remove('show')}
 function clearLocalBackup(){localStorage.removeItem('technorth_prepared_backup');alert('Prepared backup cleared. Your live app data was not deleted.')}
 document.getElementById('mobileNav') || document.body.insertAdjacentHTML('beforeend','<nav id="mobileNav" aria-label="Mobile navigation"></nav>');
 $('toolSearch').oninput=tools;$('toolFilter').onchange=tools;$('toolCategory').onchange=tools;$('workerSearch').oninput=workers;$('coSearch').oninput=renderCheckoutEquipment;$('coCategory').onchange=renderCheckoutEquipment;if($('histCategory'))$('histCategory').onchange=histSelect;if($('histTool'))$('histTool').onchange=showHistory;if($('histWorker'))$('histWorker').onchange=showHistory;nav();loadSettings();render();hydratePhotos();
-
-// Equipment add/edit workflow: keep existing database and IDs intact.
-function openTool(id){
-  const x=id?db.tools.find(t=>String(t.id)===String(id)):null;
-  if(id&&!x){alert('Equipment record not found.');return}
-  $('modalbox').innerHTML=`<h2>${x?'Edit Equipment':'Add Equipment'}</h2>
-  <div class="grid">
-    <div><label>Equipment name *</label><input id="teName" value="${esc(x?.name||'')}" autocomplete="off"></div>
-    <div><label>Equipment number *</label><input id="teEquip" value="${esc(x?.equip||'')}" autocomplete="off"></div>
-    <div><label>Serial number</label><input id="teSerial" value="${esc(x?.serial||'')}" autocomplete="off"></div>
-    <div><label>Make / Brand</label><input id="teMake" value="${esc(x?.make||'')}" autocomplete="off"></div>
-    <div><label>Category</label><input id="teCategory" list="teCats" value="${esc(x?.category||'')}" autocomplete="off"><datalist id="teCats">${[...new Set([...(db.categories||[]),...db.tools.map(t=>t.category).filter(Boolean)])].map(c=>`<option value="${esc(c)}">`).join('')}</datalist></div>
-    <div><label>Quantity</label><input id="teQty" type="number" min="1" step="1" value="${Math.max(1,Number(x?.qty)||1)}"></div>
-    <div><label>Weight (kg)</label><input id="teWeight" type="number" min="0" step="any" value="${esc(x?.weightKg??x?.weight??'')}"></div>
-    <div><label>Status</label><select id="teStatus">${['Available','Checked Out','Damaged','Missing','Archived'].map(s=>`<option ${((x?.status||'Available')===s)?'selected':''}>${s}</option>`).join('')}</select></div>
-  </div><div class="toolbar"><button class="btn" onclick="saveToolRecord('${x?String(x.id).replace(/'/g,"\\'"):""}')">Save Equipment</button><button class="btn gray" onclick="closeModal()">Cancel</button></div>`;
-  $('modal').classList.add('show');
-  setTimeout(()=> $('teName')?.focus(),50);
-}
-function saveToolRecord(id){
-  const name=$('teName').value.trim(), equip=$('teEquip').value.trim();
-  if(!name||!equip){alert('Please enter the equipment name and equipment number.');return}
-  const serial=$('teSerial').value.trim();
-  const qty=Math.max(1,parseInt($('teQty').value||'1',10)||1);
-  const category=$('teCategory').value.trim();
-  const existing=id?db.tools.find(t=>String(t.id)===String(id)):null;
-  const values={name,equip,serial,make:$('teMake').value.trim(),category,qty,weightKg:$('teWeight').value===''?'':Number($('teWeight').value),status:$('teStatus').value,archived:$('teStatus').value==='Archived'};
-  if(existing) Object.assign(existing,values);
-  else db.tools.push({id:'tool_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7),...values});
-  if(category&&!(db.categories||[]).some(c=>String(c).toLowerCase()===category.toLowerCase())){db.categories=db.categories||[];db.categories.push(category)}
-  if(!save())return;
-  closeModal();
-  render();
-  alert(existing?'Equipment details updated.':'Equipment added.');
-}
-function archiveTool(id){
-  const x=db.tools.find(t=>String(t.id)===String(id));if(!x)return;
-  if(!confirm('Archive '+(x.name||'this equipment')+'? It will remain in your records.'))return;
-  x.archived=true;x.status='Archived';save();render();
-}
-
 function render(){dashboard();tools();workers();checkoutPage();histSelect();users();loadSettings()}
+// If localStorage was full on a previous visit, restore the latest IndexedDB copy.
+readToolStorage().then(saved=>{
+  if(saved && Array.isArray(saved.tools)){
+    db=saved;db.tools=db.tools||[];db.workers=db.workers||[];db.events=db.events||[];
+    db.users=db.users||[];db.categories=db.categories||[];db.loans=db.loans||[];
+    db.archivedWorkers=db.archivedWorkers||[];db.archivedTools=db.archivedTools||[];
+    db.settings=Object.assign({name:'Tool Management',dueDays:7,soonDays:2,notifications:false,autoBackup:true},db.settings||{});
+    render();
+  }
+}).catch(err=>console.warn('IndexedDB restore unavailable',err));
+
 
 
 
